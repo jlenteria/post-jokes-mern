@@ -10,15 +10,15 @@ export const registerAccount = (data, history) => dispatch => {
     .then(() => {
       setTimeout(() => {
         history.push('/login');
-      }, 2000);
-      toast.success('Succesfull Registered');
+      }, 1000);
+      toast.success('Succesfull Registered', { autoClose: 1500 });
     })
     .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data,
       });
-      toast.error(err.response.data);
+      toast.error(err.response.data, { autoClose: 1500 });
     });
 };
 
@@ -28,7 +28,7 @@ export const loginAccount = data => dispatch => {
     .then(res => {
       const { token } = res.data;
       setTimeout(() => {
-        toast.success('Successfully Login');
+        toast.success('Successfully Login', { autoClose: 1500 });
       }, 200);
       //set Token to ls
       localStorage.setItem('jwtToken', token);
@@ -44,7 +44,7 @@ export const loginAccount = data => dispatch => {
         type: GET_ERRORS,
         payload: err.response.data,
       });
-      toast.error(err.response.data);
+      toast.error(err.response.data, { autoClose: 1500 });
     });
 };
 
@@ -61,8 +61,8 @@ export const logoutUser = () => dispatch => {
     setAuthToken(false);
     dispatch(setCurrentUser({}));
     window.location.reload();
-  }, 2000);
-  toast.error('Signing out ...');
+  }, 1000);
+  toast.error('Signing out ...', { autoClose: 1500 });
 };
 
 export const changeProfileTitle = (data, id) => dispatch => {

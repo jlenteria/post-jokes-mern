@@ -20,10 +20,10 @@ export const addPost = data => dispatch => {
   axios
     .post('/api/user/joke', data)
     .then(() => {
-      dispatch(getPosts());
       setTimeout(() => {
-        toast.success('Joke successfully posted!');
+        dispatch(getPosts());
       }, 500);
+      toast.success('Joke successfully posted!', { autoClose: 2000 });
     })
     .catch(err =>
       dispatch({
@@ -57,10 +57,10 @@ export const editPost = (id, text) => dispatch => {
   axios
     .put(`/api/user/jokes/list-of-jokes/${id}`, text)
     .then(() => {
-      dispatch(getPosts());
       setTimeout(() => {
-        toast.success('Joke successfully Edited!');
+        dispatch(getPosts());
       }, 500);
+      toast.success('Joke successfully Edited!', { autoClose: 1500 });
     })
     .catch(err =>
       dispatch({
@@ -74,10 +74,10 @@ export const deletePost = id => dispatch => {
   axios
     .delete(`/api/user/jokes/list-of-jokes/${id}`)
     .then(() => {
-      dispatch(getPosts());
       setTimeout(() => {
-        toast.success('Joke successfully deleted!');
+        dispatch(getPosts());
       }, 500);
+      toast.success('Joke successfully deleted!', { autoClose: 1500 });
     })
     .catch(err =>
       dispatch({

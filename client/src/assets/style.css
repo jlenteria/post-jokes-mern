@@ -256,3 +256,29 @@ label {
 .form-group input {
   color: black;
 }
+
+.footer {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.8);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #eef0f1;
+}
+
+/* Personal */
+.about {
+  width: 40%;
+  margin: 0 auto;
+  text-align: center;
+  margin-bottom: 200px;
+  padding: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.17);
+}
+.about img {
+  height: 150px;
+  width: 140px;
+}

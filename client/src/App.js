@@ -6,8 +6,8 @@ import setAuthToken from './redux/utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 
 //Components
-import Navbar from './components/layouts/nav/Navbar';
-import Footer from './components/layouts/footer/FooterLayout';
+import Navbar from './components/common/Navbar';
+import Footer from './components/common/FooterLayout';
 import LandingPage from './components/layouts/landing/LandingPage';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
@@ -18,6 +18,8 @@ import TopLayout from './components/layouts/profile/itemLayout/TopLayout';
 import ProfileLayout from './components/layouts/profile/itemLayout/ProfileLayout';
 import SettingLayout from './components/layouts/profile/itemLayout/SettingLayout';
 import ProfileLayout_2 from './components/layouts/profile/itemLayout/ProfileLayout_2';
+import About from './components/common/About';
+import Contact from './components/common/Contact';
 
 //check for token;
 if (localStorage.jwtToken) {
@@ -47,6 +49,8 @@ const App = () => {
             <Route exact component={Register} path="/register" />
             <Route exact component={LatestLayout} path="/latest" />
             <Route exact component={TopLayout} path="/top" />
+            <Route exact component={About} path="/about-me" />
+            <Route exact component={Contact} path="/contact-me" />
             <PrivateRoute exact component={ProfileLayout} path="/profile-me" />
             <PrivateRoute exact component={SettingLayout} path="/settings" />
             <PrivateRoute

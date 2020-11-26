@@ -60,9 +60,12 @@ const Left = () => {
           </p>
         </Link>
       )}
-
-      <p>About Us</p>
-      <p>Contact Us</p>
+      <Link to="/about-me" style={{ textDecoration: 'none', color: 'black' }}>
+        <p>About Me</p>
+      </Link>
+      <Link to="/contact-me" style={{ textDecoration: 'none', color: 'black' }}>
+        <p>Contact Me</p>
+      </Link>
       <div className="text-center" style={{ display: 'flex' }}>
         <a href="https://www.facebook.com/jlenteria98" target="_blank">
           <i className="fa fa-facebook mr-3" />
