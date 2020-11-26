@@ -1,0 +1,258 @@
+#body-content {
+  background-color: #eef0f1;
+  padding: 30px 0px;
+}
+/* Sidebar */
+.sidebar-left-layout,
+.sidebar-right-layout {
+  width: 25%;
+}
+.content-1,
+.content-2 {
+  margin-bottom: 15px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgba(0, 0, 0, 0.17);
+  border-radius: 6px;
+  padding: 20px;
+}
+.right-sidebar button {
+  width: 100%;
+  margin-top: 10px;
+}
+.left-sidebar,
+.right-sidebar {
+  display: block;
+  padding-top: 25px;
+}
+.side-profile-menu {
+  padding: 7px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: -20px;
+  margin-bottom: 20px;
+  align-items: center;
+  display: flex;
+}
+.left-sidebar p {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: -20px;
+}
+.left-sidebar p:hover,
+.side-profile-menu:hover {
+  background-color: white;
+}
+.left-sidebar i {
+  cursor: pointer;
+  font-size: 18px;
+}
+.left-sidebar i:hover {
+  opacity: 0.8;
+}
+
+/* CENTER */
+
+.center {
+  width: 50%;
+  padding-top: 10px;
+  margin: 0px 15px 100px 15px;
+}
+
+.feed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.feed-header-link {
+  display: flex;
+  justify-content: space-between;
+}
+.feed-header-link p {
+  margin-right: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border-bottom: 3px solid #eef0f1;
+}
+.feed-header-link p:hover {
+  background-color: rgb(226, 225, 225) !important;
+  border-bottom: 3px solid blueviolet !important;
+}
+
+.post {
+  margin-bottom: 20px;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.17);
+  border-radius: 6px;
+  padding: 20px;
+  margin-top: -10px;
+}
+img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.post-content button {
+  cursor: pointer;
+  outline: none;
+  border: 0;
+  padding: 5px 10px;
+  border-radius: 3px;
+  background-color: transparent;
+}
+.post-content button:hover {
+  background-color: #eef0f1;
+}
+
+.ellipsis-menu {
+  position: absolute;
+  background-color: skyblue;
+  padding: 10px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  margin-left: -100px;
+}
+
+/*REGISTER*/
+.divider-text {
+  position: relative;
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.divider-text span {
+  padding: 7px;
+  font-size: 12px;
+  position: relative;
+  z-index: 2;
+}
+.divider-text:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+  top: 55%;
+  left: 0;
+  z-index: 1;
+}
+
+.btn-facebook {
+  background-color: #405d9d;
+  color: #fff;
+}
+.btn-twitter {
+  background-color: #42aeec;
+  color: #fff;
+}
+
+/* Nav */
+.profile-menu {
+  cursor: pointer;
+}
+.profile-menu img:hover {
+  opacity: 0.9;
+}
+.menu-item {
+  position: absolute;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.17);
+  padding: 10px 5px;
+  margin-left: -35px;
+}
+
+/* Setting Style */
+.left-setting {
+  width: 300px;
+  padding: 5px 0px;
+  margin-right: 30px;
+  margin-top: 5px;
+  max-height: 150px;
+}
+.left-setting button {
+  color: black;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  outline: none !important;
+  width: 100%;
+  border: 0;
+  text-align: left;
+  margin-bottom: 5px;
+}
+.left-setting button:hover {
+  font-weight: 500 !important;
+  background-color: white !important;
+}
+
+.user,
+.basic,
+.links {
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.17);
+}
+
+label {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+/* Profile Style */
+.profile {
+  display: block;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile-header-center {
+  display: block;
+  text-align: center;
+  align-items: center;
+}
+.profile-header-center img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+.profile-header-bottom {
+  display: block;
+  margin-top: -20px;
+  padding-bottom: 25px;
+}
+
+.social-links i {
+  margin-right: 15px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 5px;
+}
+.social-links i:hover {
+  background-color: rgb(226, 225, 225) !important;
+}
+.left-content {
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 10px;
+  max-height: 150px;
+  width: 220px;
+  border-radius: 5px;
+}
+.left-content p {
+  font-size: 15px;
+}
+
+.form-group p {
+  font-size: 15px;
+  padding: 8px;
+  border-radius: 5px;
+}
+
+.form-group input {
+  color: black;
+}
