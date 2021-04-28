@@ -1,7 +1,7 @@
-const Post = require('../models/Post');
-const User = require('../models/User');
+const Post = require("../models/Post");
+const User = require("../models/User");
 
-const validatePost = require('../validation/post');
+const validatePost = require("../validation/post");
 
 exports.postJokesController = (req, res) => {
   const { validationText, isValid } = validatePost(req.body);
@@ -9,9 +9,9 @@ exports.postJokesController = (req, res) => {
     return res.status(400).json(validationText.error);
   }
 
-  Post.findOne({ text: req.body.text }).then(post => {
+  Post.findOne({ text: req.body.text }).then((post) => {
     if (post) {
-      validationText.error = 'Post is duplicated';
+      validationText.error = "Joke is already posted";
       return res.status(400).json(validationText.error);
     }
     const newJoke = new Post({
@@ -24,18 +24,18 @@ exports.postJokesController = (req, res) => {
 
     newJoke
       .save()
-      .then(post => res.json(post))
-      .catch(err => console.log(err));
+      .then((post) => res.json(post))
+      .catch((err) => console.log(err));
   });
 };
 
 exports.getJokesController = (req, res) => {
   Post.find()
     .sort({ date: -1 })
-    .then(jokes => {
+    .then((jokes) => {
       res.json(jokes);
     })
-    .catch(err => res.status(404).json({ notfound: 'No posts' }));
+    .catch((err) => res.status(404).json({ notfound: "No posts" }));
 };
 
 exports.getTopJokes = (req, res) => {
@@ -51,7 +51,7 @@ exports.getTopJokes = (req, res) => {
           date: 1,
           vote: 1,
           title: 1,
-          length: { $size: '$vote' },
+          length: { $size: "$vote" },
         },
       },
       { $match: { length: { $gte: 2 } } },
@@ -62,7 +62,7 @@ exports.getTopJokes = (req, res) => {
       if (results) {
         res.status(200).json(results);
       } else {
-        res.status(404).json({ notfound: 'No posts' });
+        res.status(404).json({ notfound: "No posts" });
       }
     }
   );
@@ -72,64 +72,64 @@ exports.getLatestJokes = (req, res) => {
   Post.find({})
     .sort({ date: -1 })
     .limit(10)
-    .then(posts => res.status(200).send(posts))
-    .catch(err => res.status(400).send(err));
+    .then((posts) => res.status(200).send(posts))
+    .catch((err) => res.status(400).send(err));
 };
 
 exports.voteController = (req, res) => {
-  User.findOne({ user: req.user.id }).then(user => {
+  User.findOne({ user: req.user.id }).then((user) => {
     Post.findById(req.params.id)
-      .then(jokes => {
+      .then((jokes) => {
         if (
-          jokes.vote.filter(vote => vote.user.toString() === req.user.id)
+          jokes.vote.filter((vote) => vote.user.toString() === req.user.id)
             .length > 0
         ) {
-          return res.status(400).json('You have already voted');
+          return res.status(400).json("You have already voted");
         }
 
         //Add user id to vote array
         jokes.vote.unshift({ user: req.user.id });
-        jokes.save().then(joke => res.json(joke));
+        jokes.save().then((joke) => res.json(joke));
       })
-      .catch(err => res.status(404).json('Something went wrong!'));
+      .catch((err) => res.status(404).json("Something went wrong!"));
   });
 };
 
 exports.unVoteController = (req, res) => {
-  User.findOne({ user: req.user.id }).then(user => {
-    Post.findById(req.params.id).then(jokes => {
+  User.findOne({ user: req.user.id }).then((user) => {
+    Post.findById(req.params.id).then((jokes) => {
       if (
-        jokes.vote.filter(vote => vote.user.toString() === req.user.id)
+        jokes.vote.filter((vote) => vote.user.toString() === req.user.id)
           .length === 0
       ) {
-        return res.status(400).json('You have not yet voted this joke');
+        return res.status(400).json("You have not yet voted this joke");
       }
 
       //get remove index
       const removeIndex = jokes.vote
-        .map(item => item.user.toString())
+        .map((item) => item.user.toString())
         .indexOf(req.user.id);
       jokes.vote.splice(removeIndex, 1);
 
       //save
-      jokes.save().then(joke => res.json(joke));
+      jokes.save().then((joke) => res.json(joke));
     });
   });
 };
 
 exports.listOfJokes = (req, res) => {
   User.findOne({ user: req.user.id })
-    .then(user => {
+    .then((user) => {
       Post.find({ user: req.user.id })
         .sort({ date: -1 })
-        .then(jokes => {
+        .then((jokes) => {
           res.status(200).json(jokes);
         })
-        .catch(err => {
-          res.status(400).send('There is no data');
+        .catch((err) => {
+          res.status(400).send("There is no data");
         });
     })
-    .catch(err => {
+    .catch((err) => {
       res.status(400).send(err);
     });
 };
@@ -142,36 +142,36 @@ exports.updateJoke = (req, res) => {
     return res.status(400).json(validationText.error);
   }
 
-  User.findOne({ user: req.user.id }).then(user => {
+  User.findOne({ user: req.user.id }).then((user) => {
     Post.findById(req.params.id)
-      .then(joke => {
+      .then((joke) => {
         if (!joke) {
-          return res.status(404).send('Post not found');
+          return res.status(404).send("Post not found");
         }
-        Post.findOne({ text: req.body.text }).then(jokes => {
+        Post.findOne({ text: req.body.text }).then((jokes) => {
           if (jokes) {
-            validationText.error = 'Post is duplicated';
+            validationText.error = "Post is duplicated";
             return res.status(400).json(validationText.error);
           }
 
-          updates.forEach(update => (joke[update] = req.body[update]));
+          updates.forEach((update) => (joke[update] = req.body[update]));
           joke.save();
           res.json(joke);
         });
       })
-      .catch(e => {
+      .catch((e) => {
         res.status(400).send(e);
       });
   });
 };
 
 exports.deleteJoke = (req, res) => {
-  User.findOne({ user: req.user.id }).then(user => {
-    Post.findById(req.params.id).then(joke => {
+  User.findOne({ user: req.user.id }).then((user) => {
+    Post.findById(req.params.id).then((joke) => {
       if (!joke) {
-        return res.status(404).json('Post not found');
+        return res.status(404).json("Post not found");
       }
-      joke.remove().then(() => res.status(200).json('Successfully deleted'));
+      joke.remove().then(() => res.status(200).json("Successfully deleted"));
     });
   });
 };
@@ -179,11 +179,11 @@ exports.deleteJoke = (req, res) => {
 exports.getUserJokesController = (req, res) => {
   Post.find({ user: req.params.id })
     .sort({ date: -1 })
-    .then(jokes => {
+    .then((jokes) => {
       res.status(200).json(jokes);
     })
-    .catch(err => {
-      res.status(404).json({ NotFound: 'No found Jokes' });
+    .catch((err) => {
+      res.status(404).json({ NotFound: "No found Jokes" });
     });
 };
 
@@ -200,7 +200,7 @@ exports.filterUserJokesBySize = (req, res) => {
           date: 1,
           vote: 1,
           title: 1,
-          length: { $size: '$vote' },
+          length: { $size: "$vote" },
         },
       },
       { $match: { user: req.user.id } },
@@ -214,10 +214,10 @@ exports.filterUserJokesBySize = (req, res) => {
 
 exports.getJokerLists = (req, res) => {
   User.find()
-    .then(joker => {
+    .then((joker) => {
       res.status(200).json(joker);
     })
-    .catch(err => {
-      res.status(404).json({ NotFound: 'No joker Lists' });
+    .catch((err) => {
+      res.status(404).json({ NotFound: "No joker Lists" });
     });
 };

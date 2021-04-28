@@ -1,36 +1,23 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const profileScema = new mongoose.Schema({
   user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'users',
+    type: String,
   },
   birthdate: {
     type: String,
   },
-
-  username: {
-    type: String,
-    required: true,
-    trim: true,
-    unique: true,
-    lowercase: true,
-    max: 20,
-  },
   firstname: {
     type: String,
-    required: true,
   },
   lastname: {
     type: String,
-    required: true,
   },
   contactnumber: {
     type: Number,
   },
   gender: {
     type: String,
-    required: true,
   },
   website: {
     type: String,
@@ -40,7 +27,6 @@ const profileScema = new mongoose.Schema({
   },
   status: {
     type: String,
-    required: true,
   },
   skills: {
     type: [String],
@@ -58,18 +44,15 @@ const profileScema = new mongoose.Schema({
     {
       title: {
         type: String,
-        required: true,
       },
       company: {
         type: String,
-        required: true,
       },
       location: {
         type: String,
       },
       from: {
         type: String,
-        required: true,
       },
       to: {
         type: String,
@@ -87,7 +70,6 @@ const profileScema = new mongoose.Schema({
     {
       school: {
         type: String,
-        required: true,
       },
       location: {
         type: String,
@@ -95,15 +77,12 @@ const profileScema = new mongoose.Schema({
       },
       degree: {
         type: String,
-        required: true,
       },
       fieldofstudy: {
         type: String,
-        required: true,
       },
       from: {
         type: String,
-        required: true,
       },
       to: {
         type: String,
@@ -140,4 +119,4 @@ const profileScema = new mongoose.Schema({
   },
 });
 
-module.exports = Profile = mongoose.model('profile', profileScema);
+module.exports = Profile = mongoose.model("profile", profileScema);

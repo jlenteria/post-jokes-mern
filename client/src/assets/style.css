@@ -3,9 +3,8 @@
   padding: 30px 0px;
 }
 /* Sidebar */
-.sidebar-left-layout,
 .sidebar-right-layout {
-  width: 25%;
+  width: 35%;
 }
 .content-1,
 .content-2 {
@@ -19,7 +18,6 @@
   width: 100%;
   margin-top: 10px;
 }
-.left-sidebar,
 .right-sidebar {
   display: block;
   padding-top: 25px;
@@ -33,28 +31,15 @@
   align-items: center;
   display: flex;
 }
-.left-sidebar p {
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-top: -20px;
-}
-.left-sidebar p:hover,
+
 .side-profile-menu:hover {
   background-color: white;
-}
-.left-sidebar i {
-  cursor: pointer;
-  font-size: 18px;
-}
-.left-sidebar i:hover {
-  opacity: 0.8;
 }
 
 /* CENTER */
 
-.center {
-  width: 50%;
+.center-layout {
+  width: 60%;
   padding-top: 10px;
   margin: 0px 15px 100px 15px;
 }
@@ -72,12 +57,13 @@
   margin-right: 10px;
   padding: 5px 10px;
   cursor: pointer;
-  border-radius: 5px;
   border-bottom: 3px solid #eef0f1;
+  color: white;
+  background-color: black;
 }
 .feed-header-link p:hover {
-  background-color: rgb(226, 225, 225) !important;
-  border-bottom: 3px solid blueviolet !important;
+  background-color: rgb(44, 44, 44) !important;
+  border-bottom: 3px solid red !important;
 }
 
 .post {
@@ -128,7 +114,7 @@ img {
   z-index: 2;
 }
 .divider-text:after {
-  content: '';
+  content: "";
   position: absolute;
   width: 100%;
   border-bottom: 1px solid #ddd;
@@ -157,7 +143,7 @@ img {
   position: absolute;
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.17);
-  padding: 10px 5px;
+  padding: 20px 10px;
   margin-left: -35px;
 }
 
@@ -208,12 +194,16 @@ label {
 .profile-header {
   display: flex;
   justify-content: space-between;
+  background-color: #6c757d;
 }
 
 .profile-header-center {
   display: block;
   text-align: center;
   align-items: center;
+}
+.profile-header-center h2 {
+  color: white;
 }
 .profile-header-center img {
   width: 150px;
@@ -224,6 +214,10 @@ label {
   display: block;
   margin-top: -20px;
   padding-bottom: 25px;
+  background-color: #6c757d;
+}
+.profile-header-bottom {
+  color: white;
 }
 
 .social-links i {
@@ -231,9 +225,10 @@ label {
   cursor: pointer;
   padding: 8px;
   border-radius: 5px;
+  color: white;
 }
 .social-links i:hover {
-  background-color: rgb(226, 225, 225) !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
 }
 .left-content {
   background-color: white;

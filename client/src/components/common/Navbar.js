@@ -1,22 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { logoutUser } from '../../redux/actions/AuthAction';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../../redux/actions/AuthAction";
 import {
   closeAddFormControl,
   showAddFormControl,
-} from '../../redux/actions/PostAction';
+} from "../../redux/actions/PostAction";
 
-import { ToastContainer } from 'react-toastify';
-import PostModal from '../layouts/profile/item/modals/PostModal';
+import { ToastContainer } from "react-toastify";
+import PostModal from "../layouts/profile/item/modals/PostModal";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const [state, setState] = useState({ showMenu: false });
-  const auth = useSelector(state => state.auth);
-  const post = useSelector(state => state.posts);
-  const profile = useSelector(state => state.profiles);
+  const auth = useSelector((state) => state.auth);
+  const post = useSelector((state) => state.posts);
+  const profile = useSelector((state) => state.profiles);
   const { profiles } = profile;
   const { showMenu } = state;
 
@@ -37,12 +37,14 @@ const Navbar = () => {
 
   return (
     <nav
-      className="navbar navbar-expand-lg navbar-light bg-light pt-3 border-bottom"
-      style={{ padding: '5px 80px' }}
+      className="navbar navbar-expand-lg navbar-light bg-light border-bottom"
+      style={{ padding: "30px 265px 10px 265px" }}
     >
       <ToastContainer />
       <Link to="/">
-        <p className="navbar-brand">Navbar</p>
+        <span className="navbar-brand">
+          <strong>BJokes</strong>
+        </span>
       </Link>
       <button
         className="navbar-toggler"
@@ -57,7 +59,7 @@ const Navbar = () => {
       </button>
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
-        <div className="mr-auto w-25">
+        <div className="mr-auto w-50">
           <input
             className="form-control mr-sm-2"
             type="search"
@@ -66,9 +68,9 @@ const Navbar = () => {
           />
         </div>
         {auth.isAuthenticated ? (
-          <div style={{ display: 'flex  ' }}>
+          <div style={{ display: "flex  " }}>
             <button
-              className="btn btn-primary my-2 my-sm-0 mr-5"
+              className="btn btn-outline-dark my-2 my-sm-0 mr-5"
               type="button"
               onClick={showFormClick}
             >
@@ -84,7 +86,7 @@ const Navbar = () => {
                   <Link
                     className="dropdown-item"
                     to="/profile-me"
-                    style={{ fontWeight: '600' }}
+                    style={{ fontWeight: "600" }}
                   >
                     {profiles.username ? (
                       <span>{profiles.username}</span>
@@ -100,7 +102,7 @@ const Navbar = () => {
                   <a
                     className="dropdown-item"
                     onClick={logoutClick}
-                    style={{ fontWeight: 500, cursor: 'pointer' }}
+                    style={{ fontWeight: 500, cursor: "pointer" }}
                   >
                     <i className="fa fa-sign-out" />
                     Logout

@@ -1,60 +1,29 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const passport = require('passport');
+const passport = require("passport");
 
 const {
-  postProfile,
-  getProfile,
-  postEducation,
-  postExperience,
-  deleteExperience,
-  deleteEducation,
-  getAllProfiles,
-  getProfileById,
-  getUserById,
-  deleteAccount,
-} = require('../../controllers/profileController');
+  addProfileController,
+  deleteAccountController,
+  addProfileLinksController,
+} = require("../../controllers/profileController");
+
 router.post(
-  '/user/profile',
-  passport.authenticate('jwt', { session: false }),
-  postProfile
+  "/addProfile",
+  passport.authenticate("jwt", { session: false }),
+  addProfileController
 );
 
-router.get(
-  '/user/profile',
-  passport.authenticate('jwt', { session: false }),
-  getProfile
-);
-router.get('/user/profile:/:id');
 router.post(
-  '/user/profile/experience',
-  passport.authenticate('jwt', { session: false }),
-  postExperience
-);
-router.post(
-  '/user/profile/education',
-  passport.authenticate('jwt', { session: false }),
-  postEducation
-);
-router.delete(
-  '/user/profile/education/:edu_id',
-  passport.authenticate('jwt', { session: false }),
-  deleteEducation
-);
-router.delete(
-  '/user/profile/experience/:exp_id',
-  passport.authenticate('jwt', { session: false }),
-  deleteExperience
+  "/addProfileLinks",
+  passport.authenticate("jwt", { session: false }),
+  addProfileLinksController
 );
 
-router.get('/user/all-profile', getAllProfiles);
-router.get('/user/profile/:id', getProfileById);
-router.get('/user/:id', getUserById);
-
-router.delete(
-  '/user/delete',
-  passport.authenticate('jwt', { session: false }),
-  deleteAccount
+router.post(
+  "/deleteAccount",
+  passport.authenticate("jwt", { session: false }),
+  deleteAccountController
 );
 
 module.exports = router;

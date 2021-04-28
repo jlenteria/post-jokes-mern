@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import Profile from '../item/settingsLayout/Profile';
-import { getCurrentProfile } from '../../../../redux/actions/ProfileAction';
+import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import Profile from "../item/settingsLayout/Profile";
+import { getCurrentProfile } from "../../../../redux/actions/ProfileAction";
 
 const ProfileLayout = () => {
   const dispatch = useDispatch();
-  const auth = useSelector(state => state.auth);
-  const post = useSelector(state => state.posts);
-  const profile = useSelector(state => state.profiles);
-  const errors = useSelector(state => state.errors);
+  const auth = useSelector((state) => state.auth);
+  const post = useSelector((state) => state.posts);
+  const profile = useSelector((state) => state.profiles);
+  const errors = useSelector((state) => state.errors);
   const { authPosts } = post;
   const { profiles } = profile;
 
@@ -18,15 +18,15 @@ const ProfileLayout = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    errors.error = '';
+    errors.error = "";
   });
 
   return (
     <div
       className="profile-layout min-vh-100 "
       style={{
-        padding: '0px 200px',
-        display: 'block',
+        padding: "0px 250px",
+        display: "block",
         marginBottom: 100,
       }}
     >
@@ -36,7 +36,7 @@ const ProfileLayout = () => {
             <button
               disabled
               className="btn button-transparent"
-              style={{ color: 'transparent' }}
+              style={{ color: "transparent" }}
             >
               Edit Profile
             </button>
@@ -49,17 +49,17 @@ const ProfileLayout = () => {
               />
             </div>
             {profiles.username ? (
-              <h2 className="text-info mt-2">
-                {auth.user.firstName} {auth.user.lastName}{' '}
+              <h2 className="text-white mt-2">
+                {auth.user.firstName} {auth.user.lastName}{" "}
                 <span style={{ fontSize: 25 }}> ({profiles.username})</span>
               </h2>
             ) : (
-              <h2 className="text-info mt-2">
+              <h2 className="text-white mt-2">
                 {auth.user.firstName} {auth.user.lastName}
               </h2>
             )}
 
-            <p className="text-muted" style={{ marginTop: -5 }}>
+            <p className="text-white" style={{ marginTop: -5 }}>
               Joker
             </p>
           </div>
@@ -74,8 +74,8 @@ const ProfileLayout = () => {
           <div
             className="social-links"
             style={{
-              borderTop: '1px solid rgba(0,0,0,0.07)',
-              padding: '7px 0px',
+              borderTop: "1px solid rgba(255,255,255,0.5)",
+              padding: "7px 0px",
             }}
           >
             {profiles.social && profiles.social.facebook ? (
@@ -148,24 +148,24 @@ const ProfileLayout = () => {
       <div className="d-flex justify-content-start">
         <div className="d-block mt-4 left-content">
           <p>
-            {' '}
+            {" "}
             <i className="fa fa-optin-monster" /> {authPosts.length} jokes
             posted
           </p>
           <p>
-            {' '}
+            {" "}
             <i className="fa fa-comment" /> 1 comments written
           </p>
         </div>
         <div className="d-block mt-4 ml-3 w-100">
           {authPosts.length > 0 ? (
             <div className="d-flex justify-content-between">
-              <p className="mt-3" style={{ fontWeight: 'bold', fontSize: 18 }}>
+              <p className="mt-3" style={{ fontWeight: "bold", fontSize: 18 }}>
                 Jokes
               </p>
               <select
                 className="form-control"
-                style={{ width: '20%', cursor: 'pointer' }}
+                style={{ width: "20%", cursor: "pointer" }}
               >
                 <option value="date">date</option>
                 <option value="likes">#likes</option>

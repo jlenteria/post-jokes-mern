@@ -1,32 +1,32 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addProfileAction,
   getCurrentProfile,
-} from '../../../../../redux/actions/ProfileAction';
-import isEmpty from '../../../../../validation/is-empty';
+} from "../../../../../redux/actions/ProfileAction";
+import isEmpty from "../../../../../validation/is-empty";
 
 const ProfileSetting = () => {
   const [state, setState] = useState({
-    username: '',
-    birthdate: '',
-    firstname: '',
-    lastname: '',
-    contactnumber: '',
-    gender: '',
-    status: '',
-    website: '',
-    location: '',
-    skills: '',
-    bio: '',
-    github: '',
-    email: '',
-    youtube: '',
-    twitter: '',
-    facebook: '',
-    linkedin: '',
-    instagram: '',
+    username: "",
+    birthdate: "",
+    firstname: "",
+    lastname: "",
+    contactnumber: "",
+    gender: "",
+    status: "",
+    website: "",
+    location: "",
+    skills: "",
+    bio: "",
+    github: "",
+    email: "",
+    youtube: "",
+    twitter: "",
+    facebook: "",
+    linkedin: "",
+    instagram: "",
   });
 
   const {
@@ -51,9 +51,9 @@ const ProfileSetting = () => {
   } = state;
 
   const dispatch = useDispatch();
-  const errors = useSelector(state => state.errors);
-  const profile = useSelector(state => state.profiles);
-  const auth = useSelector(state => state.auth);
+  const errors = useSelector((state) => state.errors);
+  const profile = useSelector((state) => state.profiles);
+  const auth = useSelector((state) => state.auth);
   const { error } = errors;
   const { profiles } = profile;
 
@@ -62,53 +62,53 @@ const ProfileSetting = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    errors.error = '';
+    errors.error = "";
   });
 
   useEffect(() => {
     if (profiles.length !== 0) {
       var skill;
       if (profiles.skills !== undefined) {
-        skill = profiles.skills.join(',');
+        skill = profiles.skills.join(",");
       }
       //If profile field doesn't exist, make empty string
-      profiles.username = !isEmpty(profiles.username) ? profiles.username : '';
+      profiles.username = !isEmpty(profiles.username) ? profiles.username : "";
       profiles.firstname = !isEmpty(profiles.firstname)
         ? profiles.firstname
-        : '';
+        : "";
 
-      profiles.lastname = !isEmpty(profiles.lastname) ? profiles.lastname : '';
+      profiles.lastname = !isEmpty(profiles.lastname) ? profiles.lastname : "";
 
-      profiles.website = !isEmpty(profiles.website) ? profiles.website : '';
-      profiles.location = !isEmpty(profiles.location) ? profiles.location : '';
-      profiles.github = !isEmpty(profiles.github) ? profiles.github : '';
-      profiles.bio = !isEmpty(profiles.bio) ? profiles.bio : '';
-      profiles.email = !isEmpty(profiles.email) ? profiles.email : '';
-      profiles.status = !isEmpty(profiles.status) ? profiles.status : '';
-      profiles.gender = !isEmpty(profiles.gender) ? profiles.gender : '';
+      profiles.website = !isEmpty(profiles.website) ? profiles.website : "";
+      profiles.location = !isEmpty(profiles.location) ? profiles.location : "";
+      profiles.github = !isEmpty(profiles.github) ? profiles.github : "";
+      profiles.bio = !isEmpty(profiles.bio) ? profiles.bio : "";
+      profiles.email = !isEmpty(profiles.email) ? profiles.email : "";
+      profiles.status = !isEmpty(profiles.status) ? profiles.status : "";
+      profiles.gender = !isEmpty(profiles.gender) ? profiles.gender : "";
       profiles.birthdate = !isEmpty(profiles.birthdate)
         ? profiles.birthdate
-        : '';
+        : "";
       profiles.contactnumber = !isEmpty(profiles.contactnumber)
         ? profiles.contactnumber
-        : '';
+        : "";
 
       profiles.social = !isEmpty(profiles.social) ? profiles.social : {};
       profiles.twitter = !isEmpty(profiles.social.twitter)
         ? profiles.social.twitter
-        : '';
+        : "";
       profiles.facebook = !isEmpty(profiles.social.facebook)
         ? profiles.social.facebook
-        : '';
+        : "";
       profiles.linkedin = !isEmpty(profiles.social.linkedin)
         ? profiles.social.linkedin
-        : '';
+        : "";
       profiles.youtube = !isEmpty(profiles.social.youtube)
         ? profiles.social.youtube
-        : '';
+        : "";
       profiles.instagram = !isEmpty(profiles.social.instagram)
         ? profiles.social.instagram
-        : '';
+        : "";
 
       setState({
         username: profiles.username,
@@ -139,11 +139,11 @@ const ProfileSetting = () => {
     }
   }, [profiles, auth.user.firstName, auth.user.lastName, auth.user.email]);
 
-  const handleChange = text => e => {
+  const handleChange = (text) => (e) => {
     setState({ ...state, [text]: e.target.value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const newProfile = {
       firstname,
@@ -171,30 +171,28 @@ const ProfileSetting = () => {
 
   return (
     <div className="w-100 d-block profile-setting">
-      <form className="mt-4" onSubmit={handleSubmit}>
+      <form className="mt-2" onSubmit={handleSubmit}>
         <div className="d-block bg-white p-4 mb-4 user">
-          <h5 className="mb-4" style={{ fontWeight: 'bold' }}>
+          <h5 className="mb-4" style={{ fontWeight: "bold" }}>
             User
           </h5>
           <div className="d-flex">
             <div className="form-group w-50 mr-3">
               <label className="text-dark">Firstname</label>
               <input
-                disabled
                 className="form-control"
                 name="firstname"
-                value={firstname || ''}
-                onChange={handleChange('firstname')}
+                value={firstname || ""}
+                onChange={handleChange("firstname")}
               />
             </div>
             <div className="form-group w-50">
               <label className="text-dark">Lastname</label>
               <input
-                disabled
                 className="form-control"
                 name="lastname"
-                value={lastname || ''}
-                onChange={handleChange('lastname')}
+                value={lastname || ""}
+                onChange={handleChange("lastname")}
               />
             </div>
           </div>
@@ -206,8 +204,8 @@ const ProfileSetting = () => {
               name="email"
               placeholder="Email Address"
               className="form-control"
-              value={email || ''}
-              onChange={handleChange('email')}
+              value={email || ""}
+              onChange={handleChange("email")}
             />
           </div>
           <div className="form-group">
@@ -217,16 +215,19 @@ const ProfileSetting = () => {
               name="username"
               placeholder="Username"
               className="form-control"
-              value={username || ''}
-              onChange={handleChange('username')}
+              value={username || ""}
+              onChange={handleChange("username")}
             />
             {error.username ? (
               <p className="alert-danger mt-2">{error.username}</p>
             ) : null}
           </div>
+          <div>
+            <button className="btn btn-primary mt-5">Save</button>
+          </div>
         </div>
         <div className="d-block bg-white p-4 mb-4 basic">
-          <h5 className="mb-4" style={{ fontWeight: 'bold' }}>
+          <h5 className="mb-4" style={{ fontWeight: "bold" }}>
             Basic
           </h5>
           <div className="form-group">
@@ -237,8 +238,8 @@ const ProfileSetting = () => {
               name="bio"
               placeholder="Your short bio"
               className="form-control"
-              value={bio || ''}
-              onChange={handleChange('bio')}
+              value={bio || ""}
+              onChange={handleChange("bio")}
             />
           </div>
           <div className="d-flex">
@@ -247,8 +248,8 @@ const ProfileSetting = () => {
               <select
                 className="form-control"
                 name="gender"
-                value={gender || ''}
-                onChange={handleChange('gender')}
+                value={gender || ""}
+                onChange={handleChange("gender")}
               >
                 <option>---</option>
                 <option value="Male">Male</option>
@@ -263,8 +264,8 @@ const ProfileSetting = () => {
               <select
                 className="form-control"
                 name="status"
-                value={status || ''}
-                onChange={handleChange('status')}
+                value={status || ""}
+                onChange={handleChange("status")}
               >
                 <option value="">---</option>
                 <option value="Single">Single</option>
@@ -282,8 +283,8 @@ const ProfileSetting = () => {
               name="contactnumber"
               placeholder="09094878094"
               className="form-control"
-              value={contactnumber || ''}
-              onChange={handleChange('contactnumber')}
+              value={contactnumber || ""}
+              onChange={handleChange("contactnumber")}
             />
           </div>
           <div className="form-group">
@@ -293,8 +294,8 @@ const ProfileSetting = () => {
               name="location"
               placeholder="Your location"
               className="form-control"
-              value={location || ''}
-              onChange={handleChange('location')}
+              value={location || ""}
+              onChange={handleChange("location")}
             />
           </div>
           <div className="form-group">
@@ -304,8 +305,8 @@ const ProfileSetting = () => {
               name="skills"
               placeholder="Your skills"
               className="form-control"
-              value={skills || ''}
-              onChange={handleChange('skills')}
+              value={skills || ""}
+              onChange={handleChange("skills")}
             />
           </div>
           <div className="form-group">
@@ -316,13 +317,16 @@ const ProfileSetting = () => {
               min="1980-01-01"
               max="2020-01-01"
               className="form-control"
-              value={birthdate || ''}
-              onChange={handleChange('birthdate')}
+              value={birthdate || ""}
+              onChange={handleChange("birthdate")}
             />
+          </div>
+          <div>
+            <button className="btn btn-primary mt-5">Save</button>
           </div>
         </div>
         <div className="d-block bg-white p-4 links">
-          <h5 className="mb-4" style={{ fontWeight: 'bold' }}>
+          <h5 className="mb-4" style={{ fontWeight: "bold" }}>
             Links
           </h5>
           <div className="form-group">
@@ -332,8 +336,8 @@ const ProfileSetting = () => {
               name="website"
               placeholder="www.website.com"
               className="form-control"
-              value={website || ''}
-              onChange={handleChange('website')}
+              value={website || ""}
+              onChange={handleChange("website")}
             />
             {error.website ? (
               <p className="alert-danger mt-2">{error.website}</p>
@@ -346,8 +350,8 @@ const ProfileSetting = () => {
               name="github"
               placeholder="www.github.com/sample"
               className="form-control"
-              value={github || ''}
-              onChange={handleChange('github')}
+              value={github || ""}
+              onChange={handleChange("github")}
             />
             {error.github ? (
               <p className="alert-danger mt-2">{error.github}</p>
@@ -360,8 +364,8 @@ const ProfileSetting = () => {
               name="youtube"
               placeholder="www.youtube.com/sample"
               className="form-control"
-              value={youtube || ''}
-              onChange={handleChange('youtube')}
+              value={youtube || ""}
+              onChange={handleChange("youtube")}
             />
             {error.youtube ? (
               <p className="alert-danger mt-2">{error.youtube}</p>
@@ -374,8 +378,8 @@ const ProfileSetting = () => {
               name="twitter"
               placeholder="www.twitter.com/sample"
               className="form-control"
-              value={twitter || ''}
-              onChange={handleChange('twitter')}
+              value={twitter || ""}
+              onChange={handleChange("twitter")}
             />
             {error.twitter ? (
               <p className="alert-danger mt-2">{error.twitter}</p>
@@ -388,8 +392,8 @@ const ProfileSetting = () => {
               name="facebook"
               placeholder="www.facebook.com/sample"
               className="form-control"
-              value={facebook || ''}
-              onChange={handleChange('facebook')}
+              value={facebook || ""}
+              onChange={handleChange("facebook")}
             />
             {error.facebook ? (
               <p className="alert-danger mt-2">{error.facebook}</p>
@@ -402,8 +406,8 @@ const ProfileSetting = () => {
               name="linkedin"
               placeholder="www.linkedin.com/sample"
               className="form-control"
-              value={linkedin || ''}
-              onChange={handleChange('linkedin')}
+              value={linkedin || ""}
+              onChange={handleChange("linkedin")}
             />
             {error.linkedin ? (
               <p className="alert-danger mt-2">{error.linkedin}</p>
@@ -416,14 +420,18 @@ const ProfileSetting = () => {
               name="instagram"
               placeholder="www.instagram.com/sample"
               className="form-control"
-              value={instagram || ''}
-              onChange={handleChange('instagram')}
+              value={instagram || ""}
+              onChange={handleChange("instagram")}
             />
             {error.instagram ? (
               <p className="alert-danger mt-2">{error.instagram}</p>
             ) : null}
           </div>
+          <div>
+            <button className="btn btn-primary mt-5">Save</button>
+          </div>
         </div>
+
         <button
           type="submit"
           className="btn btn-primary w-100 mt-4"

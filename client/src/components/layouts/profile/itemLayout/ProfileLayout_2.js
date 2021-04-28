@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProfileByIdAction } from '../../../../redux/actions/ProfileAction';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfileByIdAction } from "../../../../redux/actions/ProfileAction";
 
-import UserPosts from '../item/post/UserPosts';
+import UserPosts from "../item/post/UserPosts";
 
-const ProfileLayout_2 = props => {
+const ProfileLayout_2 = (props) => {
   const dispatch = useDispatch();
-  const post = useSelector(state => state.posts);
-  const profile = useSelector(state => state.profiles);
+  const post = useSelector((state) => state.posts);
+  const profile = useSelector((state) => state.profiles);
   const { userPosts } = post;
   const { profileById } = profile;
 
@@ -23,8 +23,8 @@ const ProfileLayout_2 = props => {
     <div
       className="profile-layout min-vh-100 "
       style={{
-        padding: '0px 200px',
-        display: 'block',
+        padding: "0px 250px",
+        display: "block",
         marginBottom: 100,
       }}
     >
@@ -33,11 +33,7 @@ const ProfileLayout_2 = props => {
           <div>
             <div className=" w-100 p-4 profile-header">
               <div>
-                <button
-                  disabled
-                  className="btn button-transparent"
-                  style={{ color: 'transparent' }}
-                ></button>
+                <button disabled className="btn button-transparent"></button>
               </div>
               <div className="profile-header-center">
                 <div>
@@ -46,12 +42,12 @@ const ProfileLayout_2 = props => {
                     alt=""
                   />
                 </div>
-                <h2 className="text-info mt-2">
-                  {profileById.firstname} {profileById.lastname}{' '}
+                <h2 className="mt-2">
+                  {profileById.firstname} {profileById.lastname}{" "}
                   <span style={{ fontSize: 25 }}>({profileById.username})</span>
                 </h2>
 
-                <p className="text-muted" style={{ marginTop: -5 }}>
+                <p className="text-white" style={{ marginTop: -5 }}>
                   Joker
                 </p>
               </div>
@@ -59,7 +55,7 @@ const ProfileLayout_2 = props => {
                 <button
                   disabled
                   className="btn button-transparent"
-                  style={{ color: 'transparent' }}
+                  style={{ color: "transparent" }}
                 ></button>
               </div>
             </div>
@@ -68,8 +64,8 @@ const ProfileLayout_2 = props => {
               <div
                 className="social-links"
                 style={{
-                  borderTop: '1px solid rgba(0,0,0,0.07)',
-                  padding: '7px 0px',
+                  borderTop: "1px solid rgba(0,0,0,0.07)",
+                  padding: "7px 0px",
                 }}
               >
                 {profileById.social && profileById.social.facebook ? (
@@ -145,7 +141,7 @@ const ProfileLayout_2 = props => {
               <button
                 disabled
                 className="btn button-transparent"
-                style={{ color: 'transparent' }}
+                style={{ color: "transparent" }}
               >
                 Edit Profile
               </button>
@@ -169,7 +165,7 @@ const ProfileLayout_2 = props => {
               <button
                 disabled
                 className="btn button-transparent"
-                style={{ color: 'transparent' }}
+                style={{ color: "transparent" }}
               >
                 Edit Profile
               </button>
@@ -180,23 +176,23 @@ const ProfileLayout_2 = props => {
       <div className="d-flex justify-content-start">
         <div className="d-block mt-4 left-content">
           <p>
-            {' '}
+            {" "}
             <i className="fa fa-optin-monster" /> {userPosts.length} jokes
             posted
           </p>
           <p>
-            {' '}
+            {" "}
             <i className="fa fa-comment" /> 1 comments written
           </p>
         </div>
         <div className="d-block mt-4 ml-3 w-100">
           <div className="d-flex justify-content-between">
-            <p className="mt-3" style={{ fontWeight: 'bold', fontSize: 18 }}>
+            <p className="mt-3" style={{ fontWeight: "bold", fontSize: 18 }}>
               Jokes
             </p>
             <select
               className="form-control"
-              style={{ width: '20%', cursor: 'pointer' }}
+              style={{ width: "20%", cursor: "pointer" }}
             >
               <option value="date">date</option>
               <option value="likes">#likes</option>

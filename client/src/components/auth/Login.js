@@ -1,37 +1,37 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginAccount } from '../../redux/actions/AuthAction';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAccount } from "../../redux/actions/AuthAction";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Login = props => {
+const Login = (props) => {
   const dispatch = useDispatch();
-  const auth = useSelector(state => state.auth);
-  const errors = useSelector(state => state.errors);
+  const auth = useSelector((state) => state.auth);
+  const errors = useSelector((state) => state.errors);
   const [state, setState] = useState({
-    loginEmail: '',
-    loginPassword: '',
+    loginEmail: "",
+    loginPassword: "",
   });
 
   const { loginEmail, loginPassword } = state;
 
   useEffect(() => {
     if (auth.isAuthenticated) {
-      props.history.push('/');
+      props.history.push("/");
     }
   });
 
   useEffect(() => {
-    errors.error = '';
+    errors.error = "";
   });
 
-  const handleChange = text => e => {
+  const handleChange = (text) => (e) => {
     setState({ ...state, [text]: e.target.value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const login = {
@@ -46,13 +46,13 @@ const Login = props => {
     <div
       className="card mx-auto"
       style={{
-        background: 'white',
-        width: '50%',
-        border: '1px solid rgba(0,0,0,0.16)',
+        background: "white",
+        width: "50%",
+        border: "1px solid rgba(0,0,0,0.16)",
       }}
     >
       <ToastContainer />
-      <article className="card-body mx-auto" style={{ width: '80%' }}>
+      <article className="card-body mx-auto" style={{ width: "80%" }}>
         <h4 className="card-title mt-3 text-center">Login Account</h4>
         <p className="text-center">Post a joke in your account</p>
         <p className="text-center">
@@ -78,14 +78,14 @@ const Login = props => {
               className="form-control"
               placeholder="Email address"
               type="email"
-              onChange={handleChange('loginEmail')}
+              onChange={handleChange("loginEmail")}
               value={loginEmail}
             />
           </div>
 
           <div className="form-group input-group">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{ padding: '0 15px' }}>
+              <span className="input-group-text" style={{ padding: "0 15px" }}>
                 <i className="fa fa-lock"></i>
               </span>
             </div>
@@ -94,7 +94,7 @@ const Login = props => {
               placeholder="Login password"
               type="password"
               name="loginPassword"
-              onChange={handleChange('loginPassword')}
+              onChange={handleChange("loginPassword")}
               value={loginPassword}
             />
           </div>

@@ -1,9 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Right = () => {
-  const auth = useSelector(state => state.auth);
+  const auth = useSelector((state) => state.auth);
 
   return (
     <div className="right-sidebar">
@@ -24,8 +24,14 @@ const Right = () => {
       ) : null}
 
       <div className="content-2">
-        <p style={{ borderBottom: '1px solid rgba(0,0,0,0.2)' }}>
+        <p style={{ borderBottom: "1px solid rgba(0,0,0,0.2)" }}>
           <strong>Memes</strong>
+        </p>
+        <p className="mt-2 text-break"></p>
+      </div>
+      <div className="content-2">
+        <p style={{ borderBottom: "1px solid rgba(0,0,0,0.2)" }}>
+          <strong>Famous Filipino Comedians</strong>
         </p>
         <p className="mt-2 text-break"></p>
       </div>
