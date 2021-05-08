@@ -1,9 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'users',
+    ref: "users",
   },
   text: {
     type: String,
@@ -16,19 +16,20 @@ const postSchema = new mongoose.Schema({
   lastName: {
     type: String,
   },
+
   title: {
     type: String,
   },
   photo: {
     type: String,
     default:
-      'https://res.cloudinary.com/geekysrm/image/upload/v1542221619/default-user.png',
+      "https://res.cloudinary.com/geekysrm/image/upload/v1542221619/default-user.png",
   },
   vote: [
     {
       user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
+        ref: "users",
       },
     },
   ],
@@ -38,4 +39,4 @@ const postSchema = new mongoose.Schema({
   },
 });
 
-module.exports = Post = mongoose.model('posts', postSchema);
+module.exports = Post = mongoose.model("posts", postSchema);

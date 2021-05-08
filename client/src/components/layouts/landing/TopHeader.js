@@ -1,29 +1,19 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  showFeed,
-  showLatest,
-  showTop,
-} from "../../../redux/actions/PostAction";
 
 const TopHeader = () => {
   const history = useHistory();
-  const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts);
-  const { showTopLayout, showLatestLayout, showFeedLayout } = posts;
+  const active = useSelector((state) => state.active);
 
   const showFeedClick = () => {
     history.push("/");
-    dispatch(showFeed());
   };
   const showLatestClick = () => {
     history.push("/latest");
-    dispatch(showLatest());
   };
   const showTopClick = () => {
     history.push("/top");
-    dispatch(showTop());
   };
 
   return (
@@ -36,7 +26,8 @@ const TopHeader = () => {
           onClick={showFeedClick}
           style={{
             color: "white",
-            borderBottom: showFeedLayout ? "3px solid red" : "3px solid black",
+            borderBottom:
+              active.activeHeader === 0 ? "3px solid red" : "3px solid black",
           }}
         >
           Feed
@@ -44,7 +35,8 @@ const TopHeader = () => {
         <p
           onClick={showTopClick}
           style={{
-            borderBottom: showTopLayout ? "3px solid red" : "3px solid black",
+            borderBottom:
+              active.activeHeader === 1 ? "3px solid red" : "3px solid black",
           }}
         >
           Top
@@ -52,9 +44,8 @@ const TopHeader = () => {
         <p
           onClick={showLatestClick}
           style={{
-            borderBottom: showLatestLayout
-              ? "3px solid red"
-              : "3px solid black",
+            borderBottom:
+              active.activeHeader === 2 ? "3px solid red" : "3px solid black",
           }}
         >
           Latest

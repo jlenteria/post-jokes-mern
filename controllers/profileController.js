@@ -5,61 +5,50 @@ const validateExperienceInput = require("../validation/experience");
 const validateEducationInput = require("../validation/education");
 const validateImage = require("../validation/image");
 const Post = require("../models/Post");
+const { send } = require("@sendgrid/mail");
 
 exports.addProfileController = (req, res) => {
-  const { errors, isValid } = validateProfileInput(req.body);
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
   Profile.findOne({ user: req.user.id })
     .then((profile) => {
       const {
-        Bio,
-        Gender,
-        Status,
-        ContactNo,
-        Location,
-        Skills,
-        BirthDate,
+        bio,
+        gender,
+        status,
+        contactnumber,
+        location,
+        skills,
+        birthdate,
       } = req.body;
+
       if (profile) {
         //Update profile
         const fields = {
-          firstname: req.user.firstName,
-          lastname: req.user.lastName,
-          bio: Bio,
-          gender: Gender,
-          status: Status,
-          contactnumber: ContactNo,
-          location: Location,
-          skills: Skills,
-          birthdate: BirthDate,
-          experience: profile.experience,
-          education: profile.education,
+          bio,
+          gender,
+          status,
+          contactnumber,
+          location,
+          skills,
+          birthdate,
           social: profile.social,
         };
         Profile.findOneAndUpdate({ user: req.user.id }, { $set: fields })
-          .then(() => res.json({ Message: "Profile Updated Successfully" }))
+          .then(() => res.json({ Message: "Success" }))
           .catch((err3) => res.status(400).json({ Message: err3.message }));
       } else {
         //Save Profile
-        const newProfile = new Profile({
-          firstname: req.user.firstName,
-          lastname: req.user.lastName,
+        const fields = new Profile({
           user: req.user.id,
-          bio: Bio,
-          gender: Gender,
-          status: Status,
-          contactnumber: ContactNo,
-          location: Location,
-          skills: Skills,
-          birthdate: BirthDate,
-          experience: [],
-          education: [],
-          social: {},
+          bio,
+          gender,
+          status,
+          contactnumber,
+          location,
+          skills,
+          birthdate,
         });
 
-        newProfile
+        fields
           .save()
           .then((updatedProfile) => res.json(updatedProfile))
           .catch((err2) => res.status(400).json({ Message: err2.message }));
@@ -69,53 +58,61 @@ exports.addProfileController = (req, res) => {
 };
 
 exports.addProfileLinksController = (req, res) => {
-  const { youtube, twitter, facebook, linkedin, instagram } = req.body;
-  const social = {
+  const {
     youtube,
     twitter,
     facebook,
     linkedin,
     instagram,
+    website,
+    github,
+  } = req.body;
+  const social = {
+    website,
+    youtube,
+    twitter,
+    facebook,
+    linkedin,
+    instagram,
+    github,
   };
 
-  Profile.findOne({ user: req.user.id }).then((profile) => {
-    if (profile) {
-      //Save
-      const fields = {
-        bio: profile.Bio,
-        gender: profile.Gender,
-        status: profile.Status,
-        contactnumber: profile.ContactNo,
-        location: profile.Location,
-        skills: profile.Skills,
-        birthdate: profile.BirthDate,
-        experience: profile.experience,
-        education: profile.education,
-        social,
-      };
+  Profile.findOne({ user: req.user.id })
+    .then((profile) => {
+      if (profile) {
+        //update
+        const fields = {
+          bio: profile.bio,
+          gender: profile.gender,
+          status: profile.status,
+          contactnumber: profile.contactnumber,
+          location: profile.location,
+          skills: profile.skills,
+          birthdate: profile.birthdate,
+          social,
+        };
 
-      Profile.findOneAndUpdate({ user: req.user.id }, { $set: fields })
-        .then(() => res.json({ Message: "Links Successfully Updated" }))
-        .catch((err) => res.status(400).send({ Message: err.message }));
-    } else {
-      const fields = new Profile({
-        user: req.user.id,
-        bio: "",
-        gender: "",
-        status: "",
-        contactnumber: "",
-        location: "",
-        skills: "",
-        birthdate: "",
-        experience: [],
-        education: [],
-        social,
-      });
-      fields
-        .save()
-        .then(() => res.json({ Message: "Links Successfully Saved" }));
-    }
-  });
+        Profile.findOneAndUpdate({ user: req.user.id }, { $set: fields })
+          .then(() => res.json({ Message: "Links Successfully Updated" }))
+          .catch((err) => res.status(400).send({ Message: err.message }));
+      } else {
+        const fields = new Profile({
+          user: req.user.id,
+          bio: "",
+          gender: "",
+          status: "",
+          contactnumber: "",
+          location: "",
+          skills: "",
+          birthdate: "",
+          social,
+        });
+        fields
+          .save()
+          .then(() => res.json({ Message: "Links Successfully Saved" }));
+      }
+    })
+    .catch((err) => res.send({ Message: err.message }));
 };
 
 exports.getProfileController = (req, res) => {
@@ -124,14 +121,92 @@ exports.getProfileController = (req, res) => {
     .catch((err) => res.status(500).json({ Message: err.message }));
 };
 
+exports.getUserProfile = (req, res) => {
+  Profile.findOne({ user: req.params.id })
+    .then((profile) => res.send({ Message: "Success", profile: profile }))
+    .catch((err) => res.send({ Message: "No data Found" }));
+};
+
 exports.deleteAccountController = (req, res) => {
   User.findOneAndDelete({ _id: req.user.id })
     .then((data) => {
       if (data) {
         Profile.findOneAndDelete({ user: req.user.id })
-          .then(() => res.json({ Message: "User successfully deleted" }))
+          .then(() =>
+            Post.findOneAndDelete({ user: req.user.id }).then(() =>
+              res.json({ Message: "User successfully deleted" })
+            )
+          )
           .catch((err2) => res.status(404).json({ Message: err2.message }));
       }
     })
     .catch((err) => res.status(500).json({ Message: err.message }));
+};
+
+exports.updateUserProfileController = (req, res) => {
+  const { firstname, lastname, username, email } = req.body;
+  Profile.find()
+    .then((result) => {
+      result.forEach((item) => {
+        if (item.user !== req.user.id && item.username == username) {
+          return res.send({
+            StatusCode: 400,
+            Message: "Username is already taken",
+          });
+        }
+      });
+      Profile.findOne({ user: req.user.id })
+        .then((profile) => {
+          if (profile) {
+            let fields = {
+              firstname: firstname,
+              lastname: lastname,
+              username: username,
+              bio: profile.bio,
+              gender: profile.gender,
+              status: profile.status,
+              contactnumber: profile.contactnumber,
+              location: profile.location,
+              skills: profile.skills,
+              birthdate: profile.birthdate,
+            };
+
+            //Update
+            Profile.findOneAndUpdate({ user: req.user.id }, { $set: fields })
+              .then(() => res.send({ StatusCode: 200, Message: "Success" }))
+              .catch((err2) => res.send({ Message: err2.message }));
+          } else {
+            //save
+            let fields = new Profile({
+              user: req.user.id,
+              firstname,
+              lastname,
+              username,
+              bio: "",
+              gender: "",
+              status: "",
+              contactnumber: "",
+              location: "",
+              skills: "",
+              birthdate: "",
+            });
+
+            fields
+              .save()
+              .then(() => res.send({ StatusCode: 200, Message: "Success" }))
+              .catch((err) => res.send({ Message: err.message }));
+          }
+          //Update
+          User.findOneAndUpdate(
+            { _id: req.user.id },
+            { $set: { firstName: firstname, lastName: lastname, email: email } }
+          )
+            .then(() => {})
+            .catch(() => {});
+        })
+
+        .catch((err) => {});
+    })
+
+    .catch((err2) => res.send({ Message: err2.message }));
 };

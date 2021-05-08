@@ -1,44 +1,44 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/style-prop-object */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState, useEffect } from 'react';
-import '../../assets/style.css';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { registerAccount } from '../../redux/actions/AuthAction';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React, { useState, useEffect } from "react";
+import "../../assets/style.css";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { registerAccount } from "../../redux/actions/AuthAction";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const Register = props => {
+const Register = (props) => {
   const dispatch = useDispatch();
-  const errors = useSelector(state => state.errors);
-  const auth = useSelector(state => state.auth);
+  const errors = useSelector((state) => state.errors);
+  const auth = useSelector((state) => state.auth);
 
   const [state, setState] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password1: '',
-    password2: '',
+    firstName: "",
+    lastName: "",
+    email: "",
+    password1: "",
+    password2: "",
   });
 
   const { firstName, lastName, email, password1, password2 } = state;
 
   useEffect(() => {
     if (auth.isAuthenticated) {
-      props.history.push('/');
+      props.history.push("/");
     }
   });
 
   useEffect(() => {
-    errors.error = '';
+    errors.error = "";
   });
 
-  const handleChange = text => e => {
+  const handleChange = (text) => (e) => {
     setState({ ...state, [text]: e.target.value });
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const newUser = {
       firstName,
@@ -52,33 +52,22 @@ const Register = props => {
   };
   return (
     <div
-      className="card mx-auto"
+      className="col-5 mx-auto"
       style={{
-        background: 'white',
-        width: '50%',
-        border: '1px solid rgba(0,0,0,0.16)',
-        margin: '20px 0',
+        background: "white",
+        border: "1px solid rgba(0,0,0,0.16)",
       }}
     >
       <ToastContainer />
-      <article className="card-body mx-auto" style={{ width: '80%' }}>
+      <article className="container mx-auto p-4">
         <h4 className="card-title mt-3 text-center">Create Account</h4>
         <p className="text-center">Get started with your free account</p>
-        <p className="text-center">
-          <a href="" className="btn btn-danger  w-100 btn-twitter">
-            <i className="fa fa-google"></i>   Login via Google
-          </a>
-          <a href="" className="btn btn-primary w-100 mt-2 btn-facebook ">
-            <i className="fa fa-facebook-f"></i>   Login via facebook
-          </a>
-        </p>
-        <p className="divider-text">
-          <span className="bg-light">OR</span>
-        </p>
+        <hr className="mb-4" />
+
         <form onSubmit={handleSubmit}>
           <div className="form-group input-group">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{ padding: '0 15px' }}>
+              <span className="input-group-text" style={{ padding: "0 15px" }}>
                 <i className="fa fa-user"></i>
               </span>
             </div>
@@ -87,7 +76,7 @@ const Register = props => {
               className="form-control mr-2"
               placeholder="First name"
               type="text"
-              onChange={handleChange('firstName')}
+              onChange={handleChange("firstName")}
               value={firstName}
             />
             <input
@@ -95,7 +84,7 @@ const Register = props => {
               className="form-control"
               placeholder="Last name"
               type="text"
-              onChange={handleChange('lastName')}
+              onChange={handleChange("lastName")}
               value={lastName}
             />
           </div>
@@ -110,7 +99,7 @@ const Register = props => {
               className="form-control"
               placeholder="Email address"
               type="email"
-              onChange={handleChange('email')}
+              onChange={handleChange("email")}
               value={email}
             />
           </div>
@@ -120,7 +109,7 @@ const Register = props => {
 
           <div className="form-group input-group">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{ padding: '0 15px' }}>
+              <span className="input-group-text" style={{ padding: "0 15px" }}>
                 <i className="fa fa-lock"></i>
               </span>
             </div>
@@ -129,32 +118,32 @@ const Register = props => {
               placeholder="Create password"
               type="password"
               name="password1"
-              onChange={handleChange('password1')}
+              onChange={handleChange("password1")}
               value={password1}
             />
           </div>
           <div className="form-group input-group">
             <div className="input-group-prepend">
-              <span className="input-group-text" style={{ padding: '0 15px' }}>
+              <span className="input-group-text" style={{ padding: "0 15px" }}>
                 <i className="fa fa-lock"></i>
               </span>
             </div>
             <input
               className="form-control"
-              placeholder="Repeat password"
+              placeholder="Confirm password"
               type="password"
               name="password2"
-              onChange={handleChange('password2')}
+              onChange={handleChange("password2")}
               value={password2}
             />
           </div>
-          <div className="form-group">
-            <button type="submit" className="btn btn-primary btn-block">
+          <div className="form-group text-left">
+            <button type="submit" className="btn btn-primary">
               Create Account
             </button>
           </div>
-          <p className="text-center">
-            Have an account? <Link to="/login">Log In</Link>
+          <p className="text-left">
+            Already have an account? <Link to="/login">Log In</Link>
           </p>
         </form>
       </article>

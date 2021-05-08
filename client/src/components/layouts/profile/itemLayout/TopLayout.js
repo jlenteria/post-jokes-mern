@@ -6,20 +6,19 @@ import { TopPost } from "../item/post/TopPost";
 const TopLayout = () => {
   return (
     <div
-      className="landing"
+      className="row landing"
       style={{
-        padding: "0px 250px",
         minHeight: "85vh",
-        display: "flex",
-        justifyContent: "space-between",
       }}
     >
-      <div className="center-layout">
-        <TopHeader />
-        <TopPost />
-      </div>
-      <div className="sidebar-right-layout">
-        <Right />
+      <div className="col-md-7 mx-auto d-flex justify-content-between">
+        <div className="center-layout">
+          <TopHeader />
+          <TopPost />
+        </div>
+        <div className="sidebar-right-layout">
+          <Right />
+        </div>
       </div>
     </div>
   );

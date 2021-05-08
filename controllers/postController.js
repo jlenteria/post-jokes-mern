@@ -16,9 +16,6 @@ exports.postJokesController = (req, res) => {
     }
     const newJoke = new Post({
       text: req.body.text,
-      firstName: req.user.firstName,
-      lastName: req.user.lastName,
-      avatar: req.body.avatar,
       user: req.user.id,
     });
 
@@ -69,7 +66,7 @@ exports.getTopJokes = (req, res) => {
 };
 
 exports.getLatestJokes = (req, res) => {
-  Post.find({})
+  Post.find()
     .sort({ date: -1 })
     .limit(10)
     .then((posts) => res.status(200).send(posts))
@@ -115,6 +112,12 @@ exports.unVoteController = (req, res) => {
       jokes.save().then((joke) => res.json(joke));
     });
   });
+};
+
+exports.getAllJokes = (req, res) => {
+  Post.find()
+    .sort({ date: -1 })
+    .then((data) => res.send(data));
 };
 
 exports.listOfJokes = (req, res) => {
@@ -214,6 +217,7 @@ exports.filterUserJokesBySize = (req, res) => {
 
 exports.getJokerLists = (req, res) => {
   User.find()
+    .sort({ date: -1 })
     .then((joker) => {
       res.status(200).json(joker);
     })

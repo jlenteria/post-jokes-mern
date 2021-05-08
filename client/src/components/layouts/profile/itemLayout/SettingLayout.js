@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ProfileSetting from "../item/settingsLayout/ProfileSetting";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,6 +10,7 @@ import {
 } from "../../../../redux/actions/ProfileAction";
 import Experience from "../item/settingsLayout/Experience";
 import Education from "../item/settingsLayout/Education";
+import ChangePassword from "../item/modals/ChangePassword";
 import { Alert } from "react-bootstrap";
 
 const SettingLayout = () => {
@@ -17,6 +18,7 @@ const SettingLayout = () => {
   const profile = useSelector((state) => state.profiles);
   const auth = useSelector((state) => state.auth);
   const { showProfile, showEducation, showExperience, profiles } = profile;
+  const [showUpdatePass, setShowUpdatePass] = useState(false);
 
   const profileClick = () => {
     dispatch(showProfileAction());
@@ -40,15 +42,18 @@ const SettingLayout = () => {
   const deleteAccount = () => {
     dispatch(deleteAccountAction());
   };
+
+  const updatePassword = () => {
+    setShowUpdatePass(true);
+  };
+
+  const handleClose = () => {
+    setShowUpdatePass(false);
+  };
+
   return (
-    <div
-      className="setting-layout min-vh-100 "
-      style={{
-        padding: "0px 250px",
-        display: "block",
-      }}
-    >
-      <div className="w-100 p-3 d-block">
+    <div className="row setting-layout min-vh-100">
+      <div className="col-md-7 p-3 d-block mx-auto">
         <div className="d-flex justify-content-between">
           {profiles.username ? (
             <h2>
@@ -64,7 +69,9 @@ const SettingLayout = () => {
             </h2>
           )}
           <div>
-            <button className="btn btn-secondary mr-3">Update Password</button>
+            <button className="btn btn-secondary mr-3" onClick={updatePassword}>
+              Update Password
+            </button>
             <button className="btn btn-danger" onClick={deleteAccount}>
               Delete Account
             </button>
@@ -81,7 +88,7 @@ const SettingLayout = () => {
             >
               Profile
             </button>
-            <button
+            {/* <button
               onClick={educationClick}
               style={{
                 background: showEducation ? "white" : "transparent",
@@ -98,8 +105,9 @@ const SettingLayout = () => {
               }}
             >
               Experience
-            </button>
+            </button> */}
           </div>
+          {showUpdatePass ? <ChangePassword handleClose={handleClose} /> : null}
           {showProfile ? <ProfileSetting /> : null}
           {showEducation ? <Education /> : null}
           {showExperience ? <Experience /> : null}

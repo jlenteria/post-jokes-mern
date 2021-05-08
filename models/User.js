@@ -18,18 +18,19 @@ const userSchema = new mongoose.Schema({
     require: true,
     lowercase: true,
   },
-  username: {
-    type: String,
-
-    trim: true,
-    unique: true,
-    lowercase: true,
-    max: 20,
-  },
   password: {
     type: String,
     required: true,
     trim: true,
+  },
+  category: {
+    type: String,
+    default: "Beginner",
+  },
+  photo: {
+    type: String,
+    default:
+      "https://res.cloudinary.com/geekysrm/image/upload/v1542221619/default-user.png",
   },
 });
 

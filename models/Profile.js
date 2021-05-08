@@ -13,15 +13,16 @@ const profileScema = new mongoose.Schema({
   lastname: {
     type: String,
   },
+  username: {
+    type: String,
+  },
   contactnumber: {
     type: Number,
   },
   gender: {
     type: String,
   },
-  website: {
-    type: String,
-  },
+
   location: {
     type: String,
   },
@@ -34,69 +35,18 @@ const profileScema = new mongoose.Schema({
   bio: {
     type: String,
   },
-  github: {
-    type: String,
-  },
+
   email: {
     type: String,
   },
-  experience: [
-    {
-      title: {
-        type: String,
-      },
-      company: {
-        type: String,
-      },
-      location: {
-        type: String,
-      },
-      from: {
-        type: String,
-      },
-      to: {
-        type: String,
-      },
-      current: {
-        type: Boolean,
-        default: false,
-      },
-      description: {
-        type: String,
-      },
-    },
-  ],
-  education: [
-    {
-      school: {
-        type: String,
-      },
-      location: {
-        type: String,
-        require: true,
-      },
-      degree: {
-        type: String,
-      },
-      fieldofstudy: {
-        type: String,
-      },
-      from: {
-        type: String,
-      },
-      to: {
-        type: String,
-      },
-      current: {
-        type: Boolean,
-        default: false,
-      },
-      description: {
-        type: String,
-      },
-    },
-  ],
+
   social: {
+    github: {
+      type: String,
+    },
+    website: {
+      type: String,
+    },
     youtube: {
       type: String,
     },

@@ -5,21 +5,20 @@ const passport = require("passport");
 const {
   registerController,
   loginController,
-  updateUserController,
+
   UpdatePasswordController,
+  GetUserData,
 } = require("../../controllers/authController");
 
 router.post("/register", registerController);
 router.post("/login", loginController);
-router.post(
-  "/updateUser",
-  passport.authenticate("jwt", { session: false }),
-  updateUserController
-);
+
 router.post(
   "/updatePassword",
   passport.authenticate("jwt", { session: false }),
   UpdatePasswordController
 );
+
+router.get("/getUserData/:id", GetUserData);
 
 module.exports = router;

@@ -1,25 +1,24 @@
-import './App.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from './redux/store';
-import setAuthToken from './redux/utils/setAuthToken';
-import jwt_decode from 'jwt-decode';
+import "./App.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import setAuthToken from "./redux/utils/setAuthToken";
+import jwt_decode from "jwt-decode";
 
 //Components
-import Navbar from './components/common/Navbar';
-import Footer from './components/common/FooterLayout';
-import LandingPage from './components/layouts/landing/LandingPage';
-import Register from './components/auth/Register';
-import Login from './components/auth/Login';
-import { logoutUser, setCurrentUser } from './redux/actions/AuthAction';
-import PrivateRoute from './components/common/PrivateRoute';
-import LatestLayout from './components/layouts/profile/itemLayout/LatestLayout';
-import TopLayout from './components/layouts/profile/itemLayout/TopLayout';
-import ProfileLayout from './components/layouts/profile/itemLayout/ProfileLayout';
-import SettingLayout from './components/layouts/profile/itemLayout/SettingLayout';
-import ProfileLayout_2 from './components/layouts/profile/itemLayout/ProfileLayout_2';
-import About from './components/common/About';
-import Contact from './components/common/Contact';
+import Navbar from "./components/common/Navbar";
+import Footer from "./components/common/FooterLayout";
+import LandingPage from "./components/layouts/landing/LandingPage";
+import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
+import { logoutUser, setCurrentUser } from "./redux/actions/AuthAction";
+import PrivateRoute from "./components/common/PrivateRoute";
+import LatestLayout from "./components/layouts/profile/itemLayout/LatestLayout";
+import TopLayout from "./components/layouts/profile/itemLayout/TopLayout";
+import ProfileLayout from "./components/layouts/profile/itemLayout/ProfileLayout";
+import SettingLayout from "./components/layouts/profile/itemLayout/SettingLayout";
+import About from "./components/common/About";
+import Contact from "./components/common/Contact";
 
 //check for token;
 if (localStorage.jwtToken) {
@@ -53,11 +52,6 @@ const App = () => {
             <Route exact component={Contact} path="/contact-me" />
             <PrivateRoute exact component={ProfileLayout} path="/profile-me" />
             <PrivateRoute exact component={SettingLayout} path="/settings" />
-            <PrivateRoute
-              exact
-              component={ProfileLayout_2}
-              path="/profile/:name"
-            />
           </Switch>
         </div>
       </BrowserRouter>

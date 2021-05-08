@@ -21,20 +21,23 @@ const Right = () => {
             </button>
           </Link>
         </div>
-      ) : null}
-
-      <div className="content-2">
-        <p style={{ borderBottom: "1px solid rgba(0,0,0,0.2)" }}>
-          <strong>Memes</strong>
-        </p>
-        <p className="mt-2 text-break"></p>
-      </div>
-      <div className="content-2">
-        <p style={{ borderBottom: "1px solid rgba(0,0,0,0.2)" }}>
-          <strong>Famous Filipino Comedians</strong>
-        </p>
-        <p className="mt-2 text-break"></p>
-      </div>
+      ) : (
+        <div className="d-block">
+          {" "}
+          <div className="content-2">
+            <p style={{ borderBottom: "1px solid rgba(0,0,0,0.2)" }}>
+              <strong>Memes</strong>
+            </p>
+            <p className="mt-2 text-break"></p>
+          </div>
+          <div className="content-2">
+            <p style={{ borderBottom: "1px solid rgba(0,0,0,0.2)" }}>
+              <strong>Famous Filipino Comedians</strong>
+            </p>
+            <p className="mt-2 text-break"></p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

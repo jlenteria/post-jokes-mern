@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const passport = require('passport');
+const passport = require("passport");
 
 const {
   postJokesController,
@@ -14,48 +14,51 @@ const {
   getUserJokesController,
   getLatestJokes,
   filterUserJokesBySize,
-} = require('../../controllers/postController');
+  getAllJokes,
+  getJokeByUser,
+} = require("../../controllers/postController");
 
-router.get('/user/jokes', getJokesController);
+router.get("/user/jokes", getJokesController);
 router.post(
-  '/user/joke',
-  passport.authenticate('jwt', { session: false }),
+  "/user/joke",
+  passport.authenticate("jwt", { session: false }),
   postJokesController
 );
 router.post(
-  '/user/jokes/vote/:id',
-  passport.authenticate('jwt', { session: false }),
+  "/user/jokes/vote/:id",
+  passport.authenticate("jwt", { session: false }),
   voteController
 );
 router.post(
-  '/user/jokes/unvote/:id',
-  passport.authenticate('jwt', { session: false }),
+  "/user/jokes/unvote/:id",
+  passport.authenticate("jwt", { session: false }),
   unVoteController
 );
 
 router.get(
-  '/user/jokes/list-of-jokes',
-  passport.authenticate('jwt', { session: false }),
+  "/user/jokes/list-of-jokes",
+  passport.authenticate("jwt", { session: false }),
   listOfJokes
 );
 
 router.put(
-  '/user/jokes/list-of-jokes/:id',
-  passport.authenticate('jwt', { session: false }),
+  "/user/jokes/list-of-jokes/:id",
+  passport.authenticate("jwt", { session: false }),
   updateJoke
 );
 router.delete(
-  '/user/jokes/list-of-jokes/:id',
-  passport.authenticate('jwt', { session: false }),
+  "/user/jokes/list-of-jokes/:id",
+  passport.authenticate("jwt", { session: false }),
   deleteJoke
 );
 
-router.get('/user/joke/top-jokes', getTopJokes);
-router.get('/user/profile-joke/:id', getUserJokesController);
-router.get('/user/joke/latest-jokes', getLatestJokes);
+router.get("/user/joke/get-all-jokes", getAllJokes);
+router.get("/user/joke/top-jokes", getTopJokes);
+router.get("/user/profile-joke/:id", getUserJokesController);
+router.get("/user/joke/latest-jokes", getLatestJokes);
 router.get(
-  '/user/jokes/likes-of-jokes/filtered',
-  passport.authenticate('jwt', { session: false }),
+  "/user/jokes/likes-of-jokes/filtered",
+  passport.authenticate("jwt", { session: false }),
   filterUserJokesBySize
 );
 

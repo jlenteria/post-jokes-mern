@@ -1,6 +1,8 @@
 #body-content {
   background-color: #eef0f1;
   padding: 30px 0px;
+  margin-right: 0px;
+  margin-left: 0px;
 }
 /* Sidebar */
 .sidebar-right-layout {
@@ -20,7 +22,7 @@
 }
 .right-sidebar {
   display: block;
-  padding-top: 25px;
+  margin-top: 10px;
 }
 .side-profile-menu {
   padding: 7px;
@@ -140,6 +142,7 @@ img {
   opacity: 0.9;
 }
 .menu-item {
+  z-index: 1;
   position: absolute;
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.17);
@@ -151,7 +154,6 @@ img {
 .left-setting {
   width: 300px;
   padding: 5px 0px;
-  margin-right: 30px;
   margin-top: 5px;
   max-height: 150px;
 }
@@ -276,4 +278,18 @@ label {
 .about img {
   height: 150px;
   width: 140px;
+}
+
+.post-btn {
+  text-align: left;
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 20px;
+  padding: 10px 20px;
+  background: white;
+  margin-left: 10px;
+  outline: none !important;
+}
+.post-btn:hover {
+  background: rgba(0, 0, 0, 0.12);
 }

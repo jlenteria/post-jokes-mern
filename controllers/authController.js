@@ -12,7 +12,7 @@ const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
 
 exports.registerController = (req, res) => {
-  const { firstName, lastName, email, password1, photo, title } = req.body;
+  const { firstName, lastName, email, password1 } = req.body;
   const { validationText, isValid } = validateRegisterInput(req.body);
   if (!isValid) {
     return res.status(400).json(validationText.error);
@@ -79,6 +79,7 @@ exports.loginController = async (req, res) => {
             lastName: user.lastName,
             email: user.email,
             photo: user.photo,
+            username: user.username,
           };
 
           //sign token
@@ -106,47 +107,42 @@ exports.loginController = async (req, res) => {
   }
 };
 
-exports.updateUserController = (req, res) => {
-  const { Firstname, Lastname, Email, Password, Username } = req.body;
-  // const { validationText, isValid } = validateUpdate(req.body);
-  // if (!isValid) {
-  //   return res.status(400).json(validationText.error);
-  // }
+exports.UpdatePasswordController = (req, res) => {
+  var { oldPassword, newPassword } = req.body;
 
-  User.find()
-    .then((result) => {
-      result.forEach((item) => {
-        if (item._id != req.user.id && item.username == Username) {
-          return res.send({ Message: "Username is already taken" });
-        }
-        if (item._id != req.user.id && item.email == Email) {
-          return res.send({ Message: "Email is already taken" });
+  User.findOne({ _id: req.user.id })
+    .then((user) => {
+      bcrypt.compare(oldPassword, user.password).then((isMatch) => {
+        if (isMatch) {
+          bcrypt.genSalt(10, (err, salt) => {
+            bcrypt.hash(newPassword, salt, (err2, hash) => {
+              if (err2) {
+                console.log(err2);
+              }
+              newPassword = hash;
+              User.findOneAndUpdate(
+                { _id: req.user.id },
+                { $set: { password: newPassword } }
+              )
+                .then(() => res.send({ StatusCode: 200, Message: "Success" }))
+                .catch((ex) => res.send({ Message: ex.message }));
+            });
+          });
+        } else {
+          return res.send({
+            StatusCode: 404,
+            Message: "Password doesn't match to your account",
+          });
         }
       });
-
-      // Update User
-      User.findOneAndUpdate(
-        { _id: req.user.id },
-        {
-          $set: {
-            firstName: Firstname,
-            lastName: Lastname,
-            email: Email,
-            username: Username,
-          },
-        }
-      )
-        .then(() => res.json({ Message: "Success" }))
-        .catch((err2) => console.log(err2.message));
     })
-    .catch((err) => {
-      res.status(500).json(err.message);
-    });
+    .catch(() => res.send({ Message: "Error updating password" }));
 };
 
-exports.UpdatePasswordController = (req, res) => {
-  const { Password } = req.body;
-  User.findOneAndUpdate({ _id: req.user.id }, { password: Password })
-    .then(() => res.json({ Message: "Password Successfully Updated" }))
-    .catch(() => res.send({ Message: "Error updating password" }));
+exports.GetUserData = (req, res) => {
+  User.findById(req.params.id)
+    .then((user) => {
+      res.send({ Message: "Success", user });
+    })
+    .catch((err) => res.send({ Message: "No Data Found" }));
 };
