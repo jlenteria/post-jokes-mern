@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutUser } from "../../redux/actions/AuthAction";
+import { getAllUsers, logoutUser } from "../../redux/actions/AuthAction";
 import {
   closeAddFormControl,
   showAddFormControl,
@@ -70,18 +70,11 @@ const Navbar = () => {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <div className="mr-auto w-25">
-            <input
-              className="form-control mr-sm-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-          </div>
+          <div className="mr-auto w-50"></div>
           {auth.isAuthenticated ? (
             <div style={{ display: "flex  " }}>
               <button
-                className="btn btn-outline-dark my-2 my-sm-0 mr-5"
+                className="btn btn-info my-2 my-sm-0 mr-3"
                 type="button"
                 onClick={showFormClick}
               >

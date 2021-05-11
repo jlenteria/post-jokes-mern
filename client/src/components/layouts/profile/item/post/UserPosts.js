@@ -102,7 +102,7 @@ const UserPosts = ({ userId }) => {
                       style={{ marginTop: -18, fontSize: 15 }}
                       className="text-muted"
                     >
-                      {item.category}
+                      {item.category} Joker
                     </p>
                   </div>
                 </div>

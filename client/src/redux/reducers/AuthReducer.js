@@ -2,17 +2,17 @@
 import {
   SET_CURRENT_USER,
   GET_ERRORS,
-  GET_CURRENT_USER,
   GET_CATEGORY,
+  GET_ALL_USER,
 } from "../types";
 import isEmpty from "../../validation/is-empty";
-import setAuthToken from "../utils/setAuthToken";
 
 const initialState = {
   isAuthenticated: false,
   isLoading: false,
   user: {},
   category: "",
+  users: [],
 };
 
 export default function (state = initialState, action) {
@@ -35,6 +35,12 @@ export default function (state = initialState, action) {
         ...state,
         category: action.payload,
       };
+    case GET_ALL_USER: {
+      return {
+        ...state,
+        users: action.payload,
+      };
+    }
     default:
       return state;
   }

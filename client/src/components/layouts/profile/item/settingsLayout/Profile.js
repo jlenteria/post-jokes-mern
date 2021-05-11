@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   closeAddFormControl,
   deletePost,
-  getAuthPosts,
-  getPosts,
   showAddFormControl,
   showEditFormControl,
   unVotePost,
@@ -99,23 +97,32 @@ const Profile = ({ postData, userId }) => {
                         />
                       </div>
                       <div style={{ display: "block", marginLeft: 8 }}>
+                        <div className="d-flex align-items-center">
+                          <p
+                            style={{
+                              fontSize: 20,
+                              fontWeight: 500,
+                              cursor: "pointer",
+                              marginRight: 20,
+                            }}
+                          >
+                            {item.firstname} {item.lastname}
+                          </p>
+                          <span
+                            className="text-muted"
+                            style={{ fontSize: 12, marginTop: -10 }}
+                          >
+                            <Moment format="MMM D YYYY" withTitle>
+                              {item.date}
+                            </Moment>{" "}
+                            (<Moment fromNow>{item.date}</Moment>)
+                          </span>
+                        </div>
                         <p
-                          style={{
-                            fontSize: 20,
-                            fontWeight: 500,
-                            cursor: "pointer",
-                          }}
-                        >
-                          {item.firstName} {item.lastName}
-                        </p>
-                        <p
+                          style={{ marginTop: -18, fontSize: 15 }}
                           className="text-muted"
-                          style={{ fontSize: 12, marginTop: -18 }}
                         >
-                          <Moment format="MMM D YYYY" withTitle>
-                            {item.date}
-                          </Moment>{" "}
-                          (<Moment fromNow>{item.date}</Moment>)
+                          {item.category} Joker
                         </p>
                       </div>
                     </div>

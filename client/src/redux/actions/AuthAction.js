@@ -2,7 +2,12 @@ import axios from "axios";
 import setAuthToken from "../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { toast } from "react-toastify";
-import { GET_CATEGORY, GET_ERRORS, SET_CURRENT_USER } from "../types";
+import {
+  GET_ALL_USER,
+  GET_CATEGORY,
+  GET_ERRORS,
+  SET_CURRENT_USER,
+} from "../types";
 
 let changePass = false;
 
@@ -98,4 +103,17 @@ export const getCategory = () => (dispatch) => {
     type: GET_CATEGORY,
     payload: "Beginner",
   });
+};
+
+export const getUserByName = (data) => (dispatch) => {
+  axios
+    .get("/api/all-users", data)
+    .then((res) => {
+      const { data } = res;
+      dispatch({
+        type: GET_ALL_USER,
+        payload: data,
+      });
+    })
+    .catch((err) => dispatch({ type: GET_ERRORS, payload: err }));
 };

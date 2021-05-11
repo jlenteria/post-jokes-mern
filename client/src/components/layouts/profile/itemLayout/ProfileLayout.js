@@ -7,7 +7,10 @@ import {
   getUsersProfile,
 } from "../../../../redux/actions/ProfileAction";
 import { defaultPhoto } from "../../../../assets/default";
-import { getUserPostsAction } from "../../../../redux/actions/PostAction";
+import {
+  getPosts,
+  getUserPostsAction,
+} from "../../../../redux/actions/PostAction";
 
 const ProfileLayout = (props) => {
   const dispatch = useDispatch();
@@ -22,6 +25,10 @@ const ProfileLayout = (props) => {
   let lastName = "";
   let photo = "";
   let category = "";
+
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [dispatch, auth.isAuthenticated]);
 
   useEffect(() => {
     dispatch(getUserPostsAction(_id));
@@ -80,13 +87,15 @@ const ProfileLayout = (props) => {
               )}
 
               <p className="text-white" style={{ marginTop: -5 }}>
-                {category} Joker
+                {category !== "" ? category : "Beginner"} Joker
               </p>
             </div>
             <div className="profile-header-button">
-              <Link to="/settings">
-                <button className="btn btn-warning">Edit Profile</button>
-              </Link>
+              {_id === auth.user.id ? (
+                <Link to="/settings">
+                  <button className="btn btn-warning">Edit Profile</button>
+                </Link>
+              ) : null}
             </div>
           </div>
           <div className="text-center profile-header-bottom">
@@ -171,10 +180,6 @@ const ProfileLayout = (props) => {
               {" "}
               <i className="fa fa-optin-monster" /> {userPosts.length} jokes
               posted
-            </p>
-            <p>
-              {" "}
-              <i className="fa fa-comment" /> 1 comments written
             </p>
           </div>
           <div className="d-block mt-4 ml-3 w-100">

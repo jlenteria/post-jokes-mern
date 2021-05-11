@@ -47,7 +47,7 @@ export const LatestPost = () => {
 
   const deleteClick = (id) => {
     setState({ showEdit: false });
-    dispatch(deletePost(id));
+    dispatch(deletePost(id, auth.user.id));
   };
 
   const showFormClick = (id, text) => {
@@ -139,7 +139,7 @@ export const LatestPost = () => {
                       style={{ marginTop: -18, fontSize: 15 }}
                       className="text-muted"
                     >
-                      {item.category}
+                      {item.category} Joker
                     </p>
                   </div>
                 </div>

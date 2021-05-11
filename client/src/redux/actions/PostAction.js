@@ -21,7 +21,6 @@ export const addPost = (data, userId) => (dispatch) => {
   axios
     .post("/api/user/joke", data)
     .then(() => {
-      dispatch(getPosts());
       setTimeout(() => {
         dispatch(getUserPostsAction(userId));
       }, 500);
@@ -64,22 +63,6 @@ export const getAllPosts = () => (dispatch) => {
   });
 };
 
-export const getUserData = (id) => {
-  return axios
-    .get(`/api/getUserData/${id}`)
-    .then((res) => {
-      const { user } = res.data;
-      const result = {
-        firstname: user.firstName,
-        lastname: user.lastName,
-        photo: user.photo,
-        category: user.category,
-      };
-      return result;
-    })
-    .catch((err) => {});
-};
-
 export const getPosts = () => (dispatch) => {
   dispatch(getTopPost());
   dispatch(getLatestPost());
@@ -104,6 +87,7 @@ export const getPosts = () => (dispatch) => {
             };
             newArr.push(obj);
           }
+          newArr.sort(compare);
           dispatch({
             type: GET_POSTS,
             payload: newArr,
@@ -123,7 +107,6 @@ export const editPost = (id, text, userId) => (dispatch) => {
   axios
     .put(`/api/user/jokes/list-of-jokes/${id}`, text)
     .then(() => {
-      dispatch(getPosts());
       setTimeout(() => {
         dispatch(getUserPostsAction(userId));
       }, 500);
@@ -141,7 +124,6 @@ export const deletePost = (id, userId) => (dispatch) => {
   axios
     .delete(`/api/user/jokes/list-of-jokes/${id}`)
     .then(() => {
-      dispatch(getPosts());
       setTimeout(() => {
         dispatch(getUserPostsAction(userId));
       }, 500);
@@ -282,6 +264,22 @@ export const getAuthPosts = () => (dispatch) => {
     );
 };
 
+export const getUserData = (id) => {
+  return axios
+    .get(`/api/getUserData/${id}`)
+    .then((res) => {
+      const { user } = res.data;
+      const result = {
+        firstname: user.firstName,
+        lastname: user.lastName,
+        photo: user.photo,
+        category: user.category,
+      };
+      return result;
+    })
+    .catch((err) => {});
+};
+
 export const getUserPostsAction = (id) => (dispatch) => {
   getUserData(id)
     .then((dataResult) => {
@@ -291,6 +289,7 @@ export const getUserPostsAction = (id) => (dispatch) => {
           .then((res) => {
             const { data } = res;
             const newData = [];
+
             if (data.length > 0) {
               data.forEach((item) => {
                 const newObj = {
@@ -306,6 +305,25 @@ export const getUserPostsAction = (id) => (dispatch) => {
                 };
                 newData.push(newObj);
               });
+
+              if (data.length >= 5 && data.length < 10) {
+                dispatch(updateCategory("Elite"));
+              }
+              if (data.length >= 10 && data.length < 20) {
+                dispatch(updateCategory("Master"));
+              }
+              if (data.length >= 20) {
+                dispatch(updateCategory("Legend"));
+              }
+              if (data.length < 5) {
+                dispatch(updateCategory("Beginner"));
+              }
+              if (data.length < 10 && data.length >= 5) {
+                dispatch(updateCategory("Elite"));
+              }
+              if (data.length < 20 && data.length >= 10) {
+                dispatch(updateCategory("Master"));
+              }
             } else {
               const newObj = {
                 date: "",
@@ -320,7 +338,6 @@ export const getUserPostsAction = (id) => (dispatch) => {
               };
               newData.push(newObj);
             }
-
             dispatch({
               type: GET_USER_POSTS,
               payload: newData,
@@ -340,6 +357,12 @@ export const getUserPostsAction = (id) => (dispatch) => {
         payload: err,
       })
     );
+};
+
+const updateCategory = (category) => (dispatch) => {
+  axios.post(`/api/updateCategory/${category}`).then(() => {
+    dispatch(getPosts());
+  });
 };
 
 export const filter = (filtered) => (dispatch) => {
@@ -366,4 +389,14 @@ export const closeAddFormControl = () => (dispatch) => {
   dispatch({
     type: CLOSE_ADD_FORM,
   });
+};
+
+const compare = (a, b) => {
+  if (a.date < b.data) {
+    return -1;
+  }
+  if (a.date > b.date) {
+    return 1;
+  }
+  return 0;
 };

@@ -80,7 +80,7 @@ const Login = (props) => {
             </div>
             <input
               className="form-control"
-              placeholder="Login password"
+              placeholder="Password"
               type="password"
               name="loginPassword"
               onChange={handleChange("loginPassword")}

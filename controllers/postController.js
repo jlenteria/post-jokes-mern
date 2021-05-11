@@ -9,21 +9,23 @@ exports.postJokesController = (req, res) => {
     return res.status(400).json(validationText.error);
   }
 
-  Post.findOne({ text: req.body.text }).then((post) => {
-    if (post) {
-      validationText.error = "Joke is already posted";
-      return res.status(400).json(validationText.error);
-    }
-    const newJoke = new Post({
-      text: req.body.text,
-      user: req.user.id,
-    });
+  Post.findOne({ text: req.body.text })
+    .sort({ date: -1 })
+    .then((post) => {
+      if (post) {
+        validationText.error = "Joke is already posted";
+        return res.status(400).json(validationText.error);
+      }
+      const newJoke = new Post({
+        text: req.body.text,
+        user: req.user.id,
+      });
 
-    newJoke
-      .save()
-      .then((post) => res.json(post))
-      .catch((err) => console.log(err));
-  });
+      newJoke
+        .save()
+        .then((post) => res.json(post))
+        .catch((err) => console.log(err));
+    });
 };
 
 exports.getJokesController = (req, res) => {

@@ -5,7 +5,7 @@ const passport = require("passport");
 const {
   registerController,
   loginController,
-
+  updateCategory,
   UpdatePasswordController,
   GetUserData,
 } = require("../../controllers/authController");
@@ -20,5 +20,11 @@ router.post(
 );
 
 router.get("/getUserData/:id", GetUserData);
+router.post(
+  "/updateCategory/:category",
+  passport.authenticate("jwt", { session: false }),
+
+  updateCategory
+);
 
 module.exports = router;

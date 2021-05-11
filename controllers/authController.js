@@ -146,3 +146,12 @@ exports.GetUserData = (req, res) => {
     })
     .catch((err) => res.send({ Message: "No Data Found" }));
 };
+
+exports.updateCategory = (req, res) => {
+  User.findOneAndUpdate(
+    { _id: req.user.id },
+    { $set: { category: req.params.category } }
+  )
+    .then(() => res.send({ Message: "Success" }))
+    .catch((err) => res.send({ Message: err }));
+};

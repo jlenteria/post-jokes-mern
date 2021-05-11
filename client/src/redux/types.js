@@ -19,7 +19,6 @@ export const SHOW_LATEST = "SHOW_LATEST";
 export const SHOW_TOP = "SHOW_TOP";
 export const ACTIVE = "ACTIVE";
 
-//PROFILe
 export const PROFILE_FORM = "PROFILE_FORM";
 export const EDUCATION_FORM = "EDUCATION_FORM";
 export const EXPERIENCE_FORM = "EXPERIENCE_FORM";
@@ -28,3 +27,4 @@ export const EDUCATION_MODAL = "EDUCATION_MODAL";
 export const EXPERIENCE_MODAL = "EXPERIENCE_MODAL";
 export const GET_PROFILE_BY_ID = "GET_PROFILE_BY_ID";
 export const GET_CATEGORY = "GET_CATEGORY";
+export const GET_ALL_USER = "GET_ALL_USER";

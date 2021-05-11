@@ -236,7 +236,7 @@ label {
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.15);
   padding: 10px;
-  max-height: 150px;
+  max-height: 100px;
   width: 220px;
   border-radius: 5px;
 }
@@ -293,3 +293,5 @@ label {
 .post-btn:hover {
   background: rgba(0, 0, 0, 0.12);
 }
+
+/* search */
